@@ -1,0 +1,34 @@
+//
+// Gradle build file voor IVH5 Java projecten.
+// Zie ook settings.gradle voor de verschillende subprojecten.
+//
+subprojects {
+	// Java plugin geeft toegang tot build, compile en testfunctionaliteit
+    apply plugin: 'java'
+	// Eclipse plugin maakt Eclipse projectbestanden via 'gradle eclipse'
+    apply plugin: 'eclipse'
+
+	// We gebruiken Java 1.7 en hoger
+    // sourceCompatibility = 1.7
+	// Versienummer voor Jars
+    version = '1.0'
+
+	// Default komen classes in 'build'; 'bin' sluit beter aan bij Eclipse
+	project.buildDir = 'bin'
+	
+	// Dependencies worden automatisch uit Maven Central opgehaald
+    repositories {
+       mavenCentral()
+    }
+
+	// Opsomming van compile- en testtime-afhankelijkheden
+	dependencies {
+        compile 'log4j:log4j:1+'
+        testCompile 'junit:junit:4.11'
+    }
+
+	// Manifest voor Jar
+    jar {
+        manifest.attributes provider: 'gradle'
+    }
+}
